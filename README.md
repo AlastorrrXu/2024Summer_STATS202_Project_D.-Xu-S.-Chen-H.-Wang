@@ -1,24 +1,59 @@
 ## Overview
 
-This repository contains the project code and results for our 2024 Summer STATS202 course at Stanford University. Our project focuses on building and evaluating machine learning models to predict URL relevance based on a variety of features. We have implemented three different models and used a voting ensemble strategy to improve the precision of our predictions.
-
-## Models Used
-
-### Model 1: Convolutional Neural Network (CNN)
-**Developed by D. Xu.**  
-A deep learning model that processes and learns from input features using convolutional layers. The model was trained using stratified K-fold cross-validation and included interaction terms and statistical feature engineering.
-
-### Model 2: Fully Connected Neural Network (NN)
-**Developed by H. Wang.**  
-A traditional neural network that utilizes fully connected layers. Interaction terms and local statistical features (mean and standard deviation) were applied during preprocessing.
-
-### Model 3: XGBoost
-**Developed by S. Chen.**  
-An implementation of gradient boosting that incorporates regularization, parallel processing, and tree pruning. XGBoost helps to handle complex relationships between features and target variables more effectively.
+In this project, we implemented a voting ensemble strategy to improve the precision of predicting URL relevance. The ensemble method combines the predictions from three different models: a Convolutional Neural Network (CNN), a Fully Connected Neural Network (NN), and an XGBoost model. By using the majority voting technique, we achieved a 1% improvement in prediction precision compared to individual models.
 
 ## Voting Strategy
 
-After generating predictions from each model, **S. Chen** implemented a voting strategy in the `voting_final.py` script to combine the outputs. For each test observation, the majority vote from the three models determined the final prediction. This ensemble approach led to a 1% improvement in prediction precision.
+The final prediction for each observation is determined by a majority vote from the three models. The formula for the voting strategy is as follows:
+
+\[
+\text{Prediction} = \text{mode}\left(\text{Model1}_{\text{CNN}}(x), \text{Model2}_{\text{NN}}(x), \text{Model3}_{\text{XGBoost}}(x)\right)
+\]
+
+where \( x \) represents the input features for each observation, and \( \text{mode}() \) represents the majority function that selects the most common prediction among the three models.
+
+### Model 1: Convolutional Neural Network (CNN)
+
+- **Developed by D. Xu.**
+- The CNN processes input features through multiple convolutional layers followed by fully connected layers. The model is trained using stratified K-fold cross-validation and includes interaction terms and statistical feature engineering.
+
+**Model Architecture:**
+
+The CNN uses the following layers:
+1. Convolutional Layers
+   - Convolution: \( \text{Conv2D}(W \ast X + b) \)
+   - Activation (ReLU): \( \text{ReLU}(X) = \max(0, X) \)
+2. Fully Connected Layers
+   - Fully Connected: \( \text{FC}(X) = W^T \cdot X + b \)
+3. Output Layer with Sigmoid Activation for binary classification:
+   - \( \sigma(X) = \frac{1}{1 + e^{-X}} \)
+
+### Model 2: Fully Connected Neural Network (NN)
+
+- **Developed by H. Wang.**
+- This model is a traditional fully connected neural network that applies interaction terms and local statistical features (mean and standard deviation) during preprocessing.
+
+**Model Architecture:**
+
+The NN consists of several fully connected layers with ReLU activations:
+1. Hidden Layers:
+   - Fully Connected: \( \text{FC}(X) = W^T \cdot X + b \)
+   - Activation (ReLU): \( \text{ReLU}(X) = \max(0, X) \)
+2. Output Layer with Sigmoid Activation:
+   - \( \sigma(X) = \frac{1}{1 + e^{-X}} \)
+
+### Model 3: XGBoost
+
+- **Developed by S. Chen.**
+- XGBoost is a gradient boosting technique that incorporates regularization, parallel processing, and tree pruning to handle complex relationships between features and target variables.
+
+**Objective Function:**
+
+The objective function for XGBoost includes a regularization term to prevent overfitting:
+\[
+\text{Obj}(\theta) = \sum_{i=1}^{n} L(y_i, \hat{y}_i) + \sum_{j=1}^{k} \Omega(f_j)
+\]
+where \( L(y_i, \hat{y}_i) \) is the loss function (e.g., logistic loss for binary classification) and \( \Omega(f_j) \) is the regularization term for tree complexity.
 
 ## Directory Structure
 
@@ -52,3 +87,4 @@ The final results are saved in the `Report/` directory, including the CSV files 
 - **D. Xu**: Project lead and developer of the Convolutional Neural Network (CNN) model.
 - **S. Chen**: Developed the XGBoost model and implemented the voting strategy.
 - **H. Wang**: Conducted data analysis and developed the Fully Connected Neural Network (NN) model.
+
