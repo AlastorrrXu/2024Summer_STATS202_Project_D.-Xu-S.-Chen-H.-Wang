@@ -6,11 +6,11 @@ In this project, we implemented a voting ensemble strategy to improve the precis
 
 The final prediction for each observation is determined by a majority vote from the three models. The formula for the voting strategy is as follows:
 
-\[
-\text{Prediction} = \text{mode}\left(\text{Model1}_{\text{CNN}}(x), \text{Model2}_{\text{NN}}(x), \text{Model3}_{\text{XGBoost}}(x)\right)
-\]
+```
+Prediction = mode(Model1_CNN(x), Model2_NN(x), Model3_XGBoost(x))
+```
 
-where \( x \) represents the input features for each observation, and \( \text{mode}() \) represents the majority function that selects the most common prediction among the three models.
+where `x` represents the input features for each observation, and `mode()` represents the majority function that selects the most common prediction among the three models.
 
 ### Model 1: Convolutional Neural Network (CNN)
 
@@ -21,12 +21,12 @@ where \( x \) represents the input features for each observation, and \( \text{m
 
 The CNN uses the following layers:
 1. Convolutional Layers
-   - Convolution: \( \text{Conv2D}(W \ast X + b) \)
-   - Activation (ReLU): \( \text{ReLU}(X) = \max(0, X) \)
+   - Convolution: Conv2D(W * X + b)
+   - Activation (ReLU): ReLU(X) = max(0, X)
 2. Fully Connected Layers
-   - Fully Connected: \( \text{FC}(X) = W^T \cdot X + b \)
+   - Fully Connected: FC(X) = W^T * X + b
 3. Output Layer with Sigmoid Activation for binary classification:
-   - \( \sigma(X) = \frac{1}{1 + e^{-X}} \)
+   - sigma(X) = 1 / (1 + exp(-X))
 
 ### Model 2: Fully Connected Neural Network (NN)
 
@@ -37,10 +37,10 @@ The CNN uses the following layers:
 
 The NN consists of several fully connected layers with ReLU activations:
 1. Hidden Layers:
-   - Fully Connected: \( \text{FC}(X) = W^T \cdot X + b \)
-   - Activation (ReLU): \( \text{ReLU}(X) = \max(0, X) \)
+   - Fully Connected: FC(X) = W^T * X + b
+   - Activation (ReLU): ReLU(X) = max(0, X)
 2. Output Layer with Sigmoid Activation:
-   - \( \sigma(X) = \frac{1}{1 + e^{-X}} \)
+   - sigma(X) = 1 / (1 + exp(-X))
 
 ### Model 3: XGBoost
 
@@ -50,10 +50,12 @@ The NN consists of several fully connected layers with ReLU activations:
 **Objective Function:**
 
 The objective function for XGBoost includes a regularization term to prevent overfitting:
-\[
-\text{Obj}(\theta) = \sum_{i=1}^{n} L(y_i, \hat{y}_i) + \sum_{j=1}^{k} \Omega(f_j)
-\]
-where \( L(y_i, \hat{y}_i) \) is the loss function (e.g., logistic loss for binary classification) and \( \Omega(f_j) \) is the regularization term for tree complexity.
+
+```
+Obj(theta) = Sum(L(y_i, y_hat_i)) + Sum(Omega(f_j))
+```
+
+where `L(y_i, y_hat_i)` is the loss function (e.g., logistic loss for binary classification) and `Omega(f_j)` is the regularization term for tree complexity.
 
 ## Directory Structure
 
@@ -87,4 +89,5 @@ The final results are saved in the `Report/` directory, including the CSV files 
 - **D. Xu**: Project lead and developer of the Convolutional Neural Network (CNN) model.
 - **S. Chen**: Developed the XGBoost model and implemented the voting strategy.
 - **H. Wang**: Conducted data analysis and developed the Fully Connected Neural Network (NN) model.
+
 
