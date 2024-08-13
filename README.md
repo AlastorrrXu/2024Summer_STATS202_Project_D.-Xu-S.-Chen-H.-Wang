@@ -52,8 +52,7 @@ The objective function for XGBoost includes a regularization term to prevent ove
 ```
 Objective(theta) = Sum(Loss(y_i, y_hat_i)) + Sum(Regularization(f_j))
 ```
-
-where `Loss(y_i, y_hat_i)` is the loss function (e.g., logistic loss for binary classification) and `Regularization(f_j)` is the regularization term for tree complexity.
+where `Loss(y_i, y_hat_i)` represents the loss function (such as logistic loss for binary classification) and `Regularization(f_j)` is the term added to prevent overfitting by penalizing model complexity, particularly in the trees used by XGBoost.
 
 ## Directory Structure
 
