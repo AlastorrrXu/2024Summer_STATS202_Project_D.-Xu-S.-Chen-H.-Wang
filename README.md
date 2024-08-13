@@ -1,12 +1,12 @@
 ## Overview
 
-In this project, we implemented a voting ensemble strategy to improve the precision of predicting URL relevance. The ensemble method combines the predictions from three different models: a Convolutional Neural Network (CNN), a Fully Connected Neural Network (NN), and an XGBoost model. By using the majority voting technique, we achieved a 1% improvement in prediction precision compared to individual models.
+In this project, we implemented a voting ensemble strategy to enhance the precision of predicting URL relevance. The ensemble method integrates predictions from three distinct models: a Convolutional Neural Network (CNN), a Fully Connected Neural Network (NN), and an XGBoost model. By employing the majority voting technique, we achieved a 1% improvement in prediction precision compared to the individual models.
 
 ## Voting Strategy
 
 The final prediction for each observation is determined by a majority vote from the three models:
 
-```
+```python
 Prediction = mode(CNN_prediction, NN_prediction, XGBoost_prediction)
 ```
 
@@ -49,10 +49,26 @@ The NN consists of several fully connected layers with ReLU activations:
 
 The objective function for XGBoost includes a regularization term to prevent overfitting:
 
-```
+```python
 Objective(theta) = Sum(Loss(y_i, y_hat_i)) + Sum(Regularization(f_j))
 ```
-where `Loss(y_i, y_hat_i)` represents the loss function (such as logistic loss for binary classification) and `Regularization(f_j)` is the term added to prevent overfitting by penalizing model complexity, particularly in the trees used by XGBoost.
+where `Loss(y_i, y_hat_i)` represents the loss function (such as logistic loss for binary classification), and `Regularization(f_j)` is the term added to prevent overfitting by penalizing model complexity, particularly in the trees used by XGBoost.
+
+## Feature Engineering Overview
+
+Each model applied specific feature engineering techniques to preprocess the data and create new features that capture important aspects of the relationships between the input variables and the target variable (URL relevance). Below is a breakdown of the feature engineering strategies used in each model.
+
+| Model | Feature Engineering Method | Description |
+| ----- | -------------------------- | ----------- |
+| CNN (Model 1) | **Interaction Terms** | Generates product terms between all pairs of features to capture complex relationships. |
+|             | **Local Statistical Features** | Creates features based on the rolling mean and standard deviation of the original features. |
+|             | **Multi-Scale Features** | Applies square, square root, and logarithmic transformations to the original features to capture information at different scales. |
+|             | **Standardization** | Uses `StandardScaler` to standardize features, ensuring they have a mean of 0 and a standard deviation of 1. |
+| NN (Model 2) | **Interaction Terms** | Similar to the CNN, generates interaction terms between features to capture their interdependencies. |
+|             | **Local Statistical Features** | Uses rolling mean and standard deviation to create local statistical features. |
+|             | **Standardization** | Standardizes features to facilitate training of the neural network. |
+| XGBoost (Model 3) | **Feature Selection** | Automatically selects the most informative features using the tree-based model's inherent feature selection capabilities. |
+|             | **Regularization** | Adds regularization terms in the objective function to prevent overfitting and maintain model simplicity. |
 
 ## Directory Structure
 
