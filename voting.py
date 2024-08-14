@@ -2,9 +2,9 @@ import pandas as pd
 import sys
 sys.path.append('D:/Users/Alastor/Desktop/STAT202/Project/Report/')
 # Importing the necessary models (assuming these files contain functions or classes to be used)
-import Model1_CNN.py
-import Model2_NN.py
-import Model3_XGBoost.py
+import Model1_CNN
+import Model2_NN
+import Model3_XGBoost
 
 # Load prediction results from three different models
 df_prediction1 = pd.read_csv('D:/Users/Alastor/Desktop/STAT202/Project/Report/model1_CNN_results.csv')
