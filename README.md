@@ -102,6 +102,7 @@ The final results are saved in the `Report/` directory, including the CSV files 
 - **D. Xu**: Project lead and developer of the Convolutional Neural Network (CNN) model.
 - **S. Chen**: Developed the XGBoost model and implemented the voting strategy.
 - **H. Wang**: Conducted data analysis and developed the Fully Connected Neural Network (NN) model.
+
 Thanks for your grading!
 
 
