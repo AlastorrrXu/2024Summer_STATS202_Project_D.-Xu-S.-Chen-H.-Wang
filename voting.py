@@ -1,5 +1,6 @@
 import pandas as pd
-
+import sys
+sys.path.append('D:/Users/Alastor/Desktop/STAT202/Project/Report/')
 # Importing the necessary models (assuming these files contain functions or classes to be used)
 import Model1_CNN.py
 import Model2_NN.py
@@ -37,3 +38,4 @@ for i in result.id:
 
 # Save the final predictions to a CSV file
 result.to_csv('D:/Users/Alastor/Desktop/STAT202/Project/Report/predictions_selected.csv', index=False)
+
